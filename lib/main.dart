@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -28,10 +26,15 @@ class TodoApp extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('TodoList')),
       drawer: Drawer(child: Center(child: Text('data'))),
-      body: Container(
-
+      body: Container(),
+      floatingActionButton: IconButton(
+        onPressed:
+            () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Text('data')),
+            ),
+        icon: Icon(Icons.abc),
       ),
-      floatingActionButton: WritePage(),
     );
   }
 }
