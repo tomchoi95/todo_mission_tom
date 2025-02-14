@@ -1,29 +1,37 @@
-import '../models/todo_model.dart';
+import 'package:todo_mission_ton/models/todo_model.dart';
 
 class TodoManager {
-  static final TodoManager _instance = TodoManager._internal();
+  List<Todo> todoList = [];
 
-  // 할 일 목록을 저장하는 리스트
-  final List<TodoModel> _todoItems = [];
+  // 생성시 데이터 초기화 하는 함수 구현 해야함.
+  static final _instance = TodoManager._internal();
 
-  // private 생성자
-  TodoManager._internal();
+  // 생성자 숨기기.
+  TodoManager._internal() {
+    _loadTodos();
+  }
 
-  // 싱글톤 인스턴스를 반환하는 팩토리 생성자
   factory TodoManager() {
     return _instance;
   }
 
-  // 할 일 목록을 반환하는 메서드
-  List<TodoModel> get todoItems => _todoItems;
-
-  // 새로운 할 일 항목을 추가하는 메서드
-  void addTodoItem(TodoModel task) {
-    _todoItems.add(task);
+  void addTodo(Todo todo) {
+    todoList.add(todo);
+    _saveTodos();
   }
 
-  // 할 일 항목을 삭제하는 메서드
-  void removeTodoItem(String id) {
-    _todoItems.removeWhere((task) => task.id == id);
+  void removeTodo(Todo todo) {
+    todoList.removeWhere((todoInList) => todoInList.id == todo.id);
+    _saveTodos();
   }
+
+  void _loadTodos() {
+    todoList += [
+      Todo(title: 'Sample Todo 1', content: 'This is a sample todo item 1'),
+      Todo(title: 'Sample Todo 2', content: 'This is a sample todo item 2'),
+      Todo(title: 'Sample Todo 3', content: 'This is a sample todo item 3'),
+    ];
+  }
+
+  void _saveTodos() {}
 }
