@@ -1,54 +1,19 @@
 import 'package:flutter/material.dart';
+import 'views/todo_list.dart';
 
-void main() => runApp(MyApp());
+// 애플리케이션의 진입점
+void main() {
+  runApp(MyApp());
+}
 
+// MyApp 클래스는 애플리케이션의 루트 위젯입니다.
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const TodoApp(),
+      title: 'Todo Mission',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: TodoListScreen(), // TodoListScreen 위젯을 홈 화면으로 설정
     );
-  }
-}
-
-class TodoApp extends StatelessWidget {
-  const TodoApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('TodoList')),
-      drawer: Drawer(child: Center(child: Text('data'))),
-      body: Container(),
-      floatingActionButton: IconButton(
-        onPressed:
-            () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Text('data')),
-            ),
-        icon: Icon(Icons.abc),
-      ),
-    );
-  }
-}
-
-class WritePage extends StatefulWidget {
-  const WritePage({super.key});
-
-  @override
-  State<WritePage> createState() => _WritePageState();
-}
-
-class _WritePageState extends State<WritePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }
