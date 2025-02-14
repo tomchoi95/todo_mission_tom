@@ -1,9 +1,14 @@
-// models/todo_model.dart
+import 'package:uuid/uuid.dart';
 
-class TodoModel {
-  final String id;
-  final String title;
-  final String content;
+class Todo {
+  var id = Uuid().v4();
+  String title;
+  String content;
+  bool isCompleted;
 
-  TodoModel({required this.id, required this.title, required this.content});
+  Todo({
+    required this.title,
+    required this.content,
+    this.isCompleted = false,
+  });
 }
