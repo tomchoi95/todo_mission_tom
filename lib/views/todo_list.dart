@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:todo_mission_ton/viewmodels/todo_view_model.dart';
 
-class TodoListView extends StatelessWidget {
-  const TodoListView({super.key});
+class TodoListView extends StatefulWidget {
+  TodoListView({super.key});
+
+  @override
+  State<TodoListView> createState() => _TodoListViewState();
+}
+
+class _TodoListViewState extends State<TodoListView> {
+  final vm = TodoListViewModel();
 
   @override
   Widget build(BuildContext context) {
-    final VM = TodoListViewModel();
-
     return Scaffold(
       appBar: AppBar(title: Text('Todo List')),
       body: _buildTodoList(),
@@ -21,7 +26,7 @@ class TodoListView extends StatelessWidget {
 
   Widget _buildTodoList() {
     return ListView.builder(
-      itemCount: 4,
+      itemCount: vm.todoList.length,
       itemBuilder: (context, index) {
         return _todoListRow(index);
       },
@@ -29,17 +34,21 @@ class TodoListView extends StatelessWidget {
   }
 
   Widget _todoListRow(int index) {
-    final int indes = index;
     return Row(
       children: [
         IconButton(
           onPressed: () {
-            // 완료 상태 토글 버튼 구현하기.
+            vm.todoList[index].isCompleted.toggle();
+            setState(() {});
           },
           icon: Icon(Icons.star),
         ),
-        Text('타이틀 들어갈 곳'),
+        Text(vm.todoList[index].title),
       ],
     );
   }
+}
+
+extension BoolToggle on bool {
+  bool toggle() => !this;
 }
